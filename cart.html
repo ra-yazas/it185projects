@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="icon" type="image/x-icon" href="images/1.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .cart-container {
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+        .product-image {
+            max-width: 100px;
+        }
+        .product-title {
+            font-weight: bold;
+        }
+        .btn-remove {
+            color: #8f0000;
+            cursor: pointer;
+        }
+        .order-summary {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .btn-primary, .btn-outline-primary {
+            background-color: #f5d7c9;
+            border-color: #f5d7c9;
+            color: #000;
+        }
+        .btn-primary:hover, .btn-outline-primary:hover {
+            background-color: #eabfad;
+            border-color: #eabfad;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loader-container">
+        <i class="bi bi-cup-straw loader-icon"></i>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <script>
+        // Simulate content loading
+        window.addEventListener('load', () => {
+            // You can replace this setTimeout with your actual loading logic
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 2000); // Shows loader for 2 seconds
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="Logo"> <!-- Replace 'your-logo.png' with the path to your logo -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Aboutus.html">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contactus.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-icons">
+                        <a href="#"><i class="bi bi-search"></i></a>
+                        <a href="cart.html"><i class="bi bi-bag"></i></a>
+                        <a href="signup.html"><i class="bi bi-person"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+    const scrollThreshold = 100;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Add or remove the navbar-hidden class based on scroll direction
+        if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+            // Scrolling down
+            navbar.classList.add('navbar-hidden');
+        } else {
+            // Scrolling up
+            navbar.classList.remove('navbar-hidden');
+        }
+
+        lastScrollTop = currentScroll;
+    });
+</script>
+
+<br>
+<br>
+
+    <div class="container cart-container">
+        <div class="row">
+            <!-- Shopping Cart -->
+            <div class="col-md-8">
+                <h3>Shopping Cart</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Details</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="images/4.png" alt="Vanilla Iced Tea" class="product-image" >
+                                <p class="product-title">Vanilla Iced Tea</p>
+                                <p class="text-muted">A refreshing blend to awaken your senses.</p>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" value="2" style="width: 60px;">
+                            </td>
+                            <td>RS 600</td>
+                            <td>RS 1200</td>
+                            <td>
+                                <span class="btn-remove">Remove</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/30.png" alt="Apple Spice Iced Tea" class="product-image">
+                                <p class="product-title">Apple Spice Iced Tea Cup</p>
+                                <p class="text-muted">Cooling and refreshing, perfect for summer.</p>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" value="1" style="width: 60px;">
+                            </td>
+                            <td>RS 600</td>
+                            <td>RS 600</td>
+                            <td>
+                                <span class="btn-remove">Remove</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/2.png" alt="Mint Iced Tea" class="product-image">
+                                <p class="product-title">Mint Iced Tea</p>
+                                <p class="text-muted">Calming tea with a touch of sweetness.</p>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" value="3" style="width: 60px;">
+                            </td>
+                            <td>RS 600</td>
+                            <td>RS 1200</td>
+                            <td>
+                                <span class="btn-remove">Remove</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/15.png" alt="Caramel Iced Tea" class="product-image">
+                                <p class="product-title">Caramel Iced Tea Cup</p>
+                                <p class="text-muted">Rich and creamy, perfect for a soothing experience.</p>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" value="1" style="width: 60px;">
+                            </td>
+                            <td>RS 600</td>
+                            <td>RS 1800</td>
+                            <td>
+                                <span class="btn-remove">Remove</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="text-decoration-none">&larr; Continue Shopping</a>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <div class="order-summary">
+                    <h5>Order Summary</h5>
+                    <p>Items: 4</p>
+                    <p>Subtotal: RS 5600</p>
+                    <div class="mb-3">
+                        <label for="shipping" class="form-label">Shipping</label>
+                        <select id="shipping" class="form-select">
+                            <option value="5">Standard Delivery - RS 300</option>
+                            <option value="10">Express Delivery - RS 600</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="promo-code" class="form-label">Promo Code</label>
+                        <input type="text" id="promo-code" class="form-control" placeholder="Enter your code">
+                        <button class="btn btn-outline-primary btn-sm mt-2">Apply</button>
+                    </div>
+                    <h5>Total Cost: RS 5600</h5>
+                    <button class="btn btn-primary w-100">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="footer">
+        <!-- Logo -->
+        <div class="footer-logo">
+            <img src="images/logo.png" alt="Company Logo">
+        </div>
+
+        <div class="container footer-content">
+            <div class="row g-4">
+                <!-- Social Icons -->
+                <div class="col-lg-4 text-center text-lg-start">
+                    <div class="social-icons mb-4 mt-4">
+                        <a href="https://instagram.com/" class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/" class="social-icon">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/" class="social-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" class="social-icon">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.youtube.com/" class="social-icon">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-4 text-center">
+                    <div class="footer-links d-flex flex-column gap-1">
+                        <a href="Aboutus.html"><i class="fa-solid fa-angle-right me-2"></i>About Us</a>
+                        <a href="products.html"><i class="fa-solid fa-angle-right me-2"></i>Our Products</a>
+                        <a href="contact.html"><i class="fa-solid fa-angle-right me-2"></i>Contact</a>
+                        <a href="privacy.html"><i class="fa-solid fa-angle-right me-2"></i>Privacy Policy</a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4 text-center text-lg-end">
+                    <h6 class="mb-3 text-white">
+                        <center>Subscribe to our newsletter</center>
+                    </h6>
+                    <div class="d-flex gap-2 justify-content-center justify-content-lg-end">
+                        <input type="email" class="form-control newsletter-input" placeholder="Enter your email">
+                        <button class="btn newsletter-button">
+                            <i class="bi bi-telegram" style="color: white;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <p class="copyright mb-0">
+                        © 2024 Pure Bliss. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
